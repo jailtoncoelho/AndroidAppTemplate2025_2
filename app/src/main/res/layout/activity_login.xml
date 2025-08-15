@@ -25,7 +25,7 @@
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="24dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,30 +43,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_email" />
-
-    <EditText
-        android:id="@+id/edit_text_number"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:hint="Telefone"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
-
-    <EditText
-        android:id="@+id/edit_text_date"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="13dp"
-        android:hint="Data de Nascimento"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_number" />
 
     <Button
         android:id="@+id/button_login"
