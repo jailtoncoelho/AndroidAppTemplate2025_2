@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_login_usuario"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:background="@color/loginBackground"
     tools:context=".ui.login.LoginActivity">
+
 
     <TextView
         android:id="@+id/text_login_title"
@@ -37,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
-        android:hint="Senha"
+        android:hint="Senha do usuário"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
