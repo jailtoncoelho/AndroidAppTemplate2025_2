@@ -83,6 +83,7 @@
     <Button
         android:id="@+id/salvarButton"
         android:layout_width="0dp"
+        android:backgroundTint="#F000"
         android:layout_height="wrap_content"
         android:text="Atualizar"
         app:layout_constraintTop_toBottomOf="@id/registerConfirmPasswordEditText"
@@ -91,6 +92,7 @@
 
     <Button
         android:id="@+id/sairButton"
+        android:backgroundTint="#FF0000"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sair"
