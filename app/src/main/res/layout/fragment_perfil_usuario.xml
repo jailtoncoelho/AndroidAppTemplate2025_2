@@ -27,15 +27,14 @@
         android:id="@+id/userProfileImageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_profile_black_24dp"
-        android:scaleType="centerCrop"
+        android:layout_marginTop="20dp"
         android:contentDescription="Foto de perfil"
-        app:layout_constraintTop_toBottomOf="@id/textCadastroUsuarioTitle"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/textCadastroUsuarioTitle" />
 
     <!-- Nome -->
     <EditText
@@ -43,13 +42,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@color/bojji_azul"
         android:hint="Nome"
         android:textColor="@color/bojji_preto"
         android:textColorHint="@color/bojji_azul"
-        android:backgroundTint="@color/bojji_azul"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/registerEnderecoEditText"
+        app:layout_constraintStart_toStartOf="@+id/registerEnderecoEditText"
         app:layout_constraintTop_toBottomOf="@id/userProfileImageView" />
+
+    <!-- Endereço -->
+    <EditText
+        android:id="@+id/registerEnderecoEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/bojji_azul"
+        android:hint="Endereço"
+        android:textColor="@color/bojji_preto"
+        android:textColorHint="@color/bojji_azul"
+        app:layout_constraintEnd_toEndOf="@+id/registerEmailEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/registerEmailEditText"
+        app:layout_constraintTop_toBottomOf="@+id/registerNameEditText" />
 
     <!-- Email -->
     <EditText
@@ -57,14 +71,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/bojji_azul"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColor="@color/bojji_preto"
         android:textColorHint="@color/bojji_azul"
-        android:backgroundTint="@color/bojji_azul"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/registerNameEditText" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEnderecoEditText" />
 
     <!-- Botão Salvar -->
     <Button
