@@ -1,14 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/bojji_fundo"
+    android:padding="10dp"
     tools:context=".ui.usuario.PerfilUsuarioFragment">
 
-    <!-- Título -->
     <TextView
         android:id="@+id/textCadastroUsuarioTitle"
         android:layout_width="wrap_content"
@@ -17,81 +16,40 @@
         android:text="Perfil de Usuário"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/bojji_preto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Foto de perfil -->
     <ImageView
         android:id="@+id/userProfileImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="Foto de perfil"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_profile_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textCadastroUsuarioTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textCadastroUsuarioTitle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Foto de perfil"/>
 
-    <!-- Nome -->
+
     <EditText
         android:id="@+id/registerNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/bojji_azul"
         android:hint="Nome"
-        android:textColor="@color/bojji_preto"
-        android:textColorHint="@color/bojji_azul"
-        app:layout_constraintEnd_toEndOf="@+id/registerEnderecoEditText"
-        app:layout_constraintStart_toStartOf="@+id/registerEnderecoEditText"
-        app:layout_constraintTop_toBottomOf="@id/userProfileImageView" />
-
-    <!-- Endereço -->
-    <EditText
-        android:id="@+id/registerEnderecoEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/bojji_azul"
-        android:hint="Endereço"
-        android:textColor="@color/bojji_preto"
-        android:textColorHint="@color/bojji_azul"
-        app:layout_constraintEnd_toEndOf="@+id/registerEmailEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/registerEmailEditText"
-        app:layout_constraintTop_toBottomOf="@+id/registerNameEditText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileImageView"/>
 
-    <!-- Email -->
     <EditText
         android:id="@+id/registerEmailEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/bojji_azul"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColor="@color/bojji_preto"
-        android:textColorHint="@color/bojji_azul"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/registerNameEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEnderecoEditText" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Botão Salvar -->
-    <Button
-        android:id="@+id/btnSalvar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Salvar Alterações"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/bojji_azul"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/registerEmailEditText"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
