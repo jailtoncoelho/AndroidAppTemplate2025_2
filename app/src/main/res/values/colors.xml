@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bojji_azul">#4577AE</color>
+    <color name="bojji_dourado">#F2CF75</color>
+    <color name="bojji_preto">#33363B</color>
+    <color name="bojji_fundo">#F3F3E7</color>
+    <color name="bojji_pele">#EFC7A1</color>
 </resources>
