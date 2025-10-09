@@ -31,6 +31,9 @@ class PerfilUsuarioFragment : Fragment() {
     private lateinit var registerNameEditText: EditText
     private lateinit var registerEmailEditText: EditText
     private lateinit var registerEnderecoEditText: EditText
+
+    private lateinit var registerTelefoneEditText: EditText
+
     private lateinit var registerPasswordEditText: EditText
     private lateinit var registerConfirmPasswordEditText: EditText
     private lateinit var registerButton: Button
