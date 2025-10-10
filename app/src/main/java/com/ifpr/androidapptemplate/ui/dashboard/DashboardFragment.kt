@@ -34,7 +34,13 @@ class DashboardFragment : Fragment() {
     private var imageUri: Uri? = null
 
 
+
+
     //TODO("Declare aqui as outras variaveis do tipo EditText que foram inseridas no layout")
+
+    private lateinit var CNPJEditText: EditText
+    private lateinit var RazaoSocialEditText: EditText
+    private lateinit var ServicoEditText: EditText
     private lateinit var salvarButton: Button
     private lateinit var selectImageButton: Button
     private lateinit var databaseReference: DatabaseReference
@@ -69,6 +75,10 @@ class DashboardFragment : Fragment() {
         enderecoEditText = view.findViewById(R.id.enderecoItemEditText)
         //TODO("Capture aqui os outro campos que foram inseridos no layout. Por exemplo, ate
         // o momento so foi capturado o endereco (EditText)")
+
+        CNPJEditText = view.findViewById(R.id.CNPJItemEditText)
+        RazaoSocialEditText = view.findViewById(R.id.RazaoSocialItemEditText2)
+        ServicoEditText = view.findViewById(R.id.ServicoItemEditText)
 
         auth = FirebaseAuth.getInstance()
 
