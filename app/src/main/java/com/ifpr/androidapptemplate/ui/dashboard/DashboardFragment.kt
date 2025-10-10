@@ -108,8 +108,12 @@ class DashboardFragment : Fragment() {
     private fun salvarItem() {
         //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
         val endereco = enderecoEditText.text.toString().trim()
+        val CNPJ = CNPJEditText.text.toString().trim()
+        val RazaoSocial = RazaoSocialEditText.text.toString().trim()
+        val Servico = ServicoEditText.text.toString().trim()
 
-        if (endereco.isEmpty() || imageUri == null) {
+
+        if (endereco.isEmpty() || CNPJ.isEmpty() || RazaoSocial.isEmpty() || Servico.isEmpty() || imageUri == null) {
             Toast.makeText(context, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT)
                 .show()
             return
@@ -127,9 +131,12 @@ class DashboardFragment : Fragment() {
             if (bytes != null) {
                 val base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
                 val endereco = enderecoEditText.text.toString().trim()
+                val CNPJ = CNPJEditText.text.toString().trim()
+                val RazaoSocial = RazaoSocialEditText.text.toString().trim()
+                val Servico = ServicoEditText.text.toString().trim()
                 //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
 
-                val item = Item(endereco, base64Image)
+                val item = Item(endereco, base64Image, CNPJ, RazaoSocial, Servico)
 
                 saveItemIntoDatabase(item)
             }
@@ -151,11 +158,14 @@ class DashboardFragment : Fragment() {
     private fun saveItemIntoDatabase(item: Item) {
         //TODO("Altere a raiz que sera criada no seu banco de dados do realtime database.
         // Renomeie a raiz itens")
-        databaseReference = FirebaseDatabase.getInstance().getReference("itens")
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("fornecedores")
 
         // Cria uma chave unica para o novo item
         val itemId = databaseReference.push().key
         if (itemId != null) {
+
             databaseReference.child(auth.uid.toString()).child(itemId).setValue(item)
                 .addOnSuccessListener {
                     Toast.makeText(context, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT)

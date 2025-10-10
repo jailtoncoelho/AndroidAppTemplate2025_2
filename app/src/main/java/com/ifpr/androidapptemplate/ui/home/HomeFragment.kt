@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
     }
 
     fun carregarItensMarketplace(container: LinearLayout) {
-        val databaseRef = FirebaseDatabase.getInstance().getReference("itens")
+        val databaseRef = FirebaseDatabase.getInstance().getReference("fornecedores")
 
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -67,9 +67,7 @@ class HomeFragment : Fragment() {
 
                         enderecoView.text = "Endereço: ${item.endereco ?: "Não informado"}"
 
-                        if (!item.imageUrl.isNullOrEmpty()) {
-                            Glide.with(container.context).load(item.imageUrl).into(imageView)
-                        } else if (!item.base64Image.isNullOrEmpty()) {
+                         if (!item.base64Image.isNullOrEmpty()) {
                             try {
                                 val bytes = Base64.decode(item.base64Image, Base64.DEFAULT)
                                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
