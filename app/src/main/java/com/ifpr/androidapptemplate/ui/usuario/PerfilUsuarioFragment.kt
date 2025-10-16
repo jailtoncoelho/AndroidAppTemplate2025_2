@@ -31,6 +31,8 @@ class PerfilUsuarioFragment : Fragment() {
     private lateinit var registerNameEditText: EditText
     private lateinit var registerEmailEditText: EditText
     private lateinit var registerEnderecoEditText: EditText
+
+    private lateinit var registerTelefoneEditText: EditText
     private lateinit var registerPasswordEditText: EditText
     private lateinit var registerConfirmPasswordEditText: EditText
     private lateinit var registerButton: Button
@@ -57,6 +59,8 @@ class PerfilUsuarioFragment : Fragment() {
         registerNameEditText = view.findViewById(R.id.registerNameEditText)
         registerEmailEditText = view.findViewById(R.id.registerEmailEditText)
         registerEnderecoEditText = view.findViewById(R.id.registerEnderecoEditText)
+        registerTelefoneEditText = view.findViewById(R.id.registerTelefoneEditText)
+
         registerPasswordEditText = view.findViewById(R.id.registerPasswordEditText)
         registerConfirmPasswordEditText = view.findViewById(R.id.registerConfirmPasswordEditText)
         registerButton = view.findViewById(R.id.salvarButton)
@@ -138,6 +142,7 @@ class PerfilUsuarioFragment : Fragment() {
                     val usuario = snapshot.getValue(Usuario::class.java)
                     usuario?.let {
                         registerEnderecoEditText.setText(it.endereco ?: "")
+                        registerTelefoneEditText.setText(it.telefone ?: "")
                     }
                 }
             }
@@ -151,40 +156,41 @@ class PerfilUsuarioFragment : Fragment() {
     private fun updateUser() {
         val name = registerNameEditText.text.toString().trim()
         val endereco = registerEnderecoEditText.text.toString().trim()
-
+        val telefone = registerTelefoneEditText.text.toString().trim()
         // Acessar currentUser
         val user = auth.currentUser
 
         // Verifica se o usuário atual já está definido
         if (user != null) {
             // Se o usuário já existe, atualiza os dados
-            updateProfile(user, name, endereco)
+            updateProfile(user, name, endereco, telefone)
         } else {
             Toast.makeText(context, "Não foi possível encontrar o usuário logado", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun updateProfile(user: FirebaseUser?, displayName: String, endereco: String) {
+    private fun updateProfile(user: FirebaseUser?, displayName: String, endereco: String, telefone: String) {
         val profileUpdates = UserProfileChangeRequest.Builder()
             .setDisplayName(displayName)
             .build()
 
-        val usuario = Usuario(user?.uid.toString() , displayName, user?.email, endereco, )
+        val usuario = Usuario(user?.uid.toString(), displayName, user?.email, endereco, telefone)
 
         user?.updateProfile(profileUpdates)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     saveUserToDatabase(usuario)
-                    Toast.makeText(context, "Nome do usuario alterado com sucesso.",
+                    Toast.makeText(context, "Perfil atualizado com sucesso.",
                         Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Não foi possivel alterar o nome do usuario.",
+                    Toast.makeText(context, "Não foi possível atualizar o perfil.",
                         Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    private fun saveUserToDatabase(usuario: Usuario) {
+
+private fun saveUserToDatabase(usuario: Usuario) {
         if (usuario.key != null) {
             usersReference.child(usuario.key.toString()).setValue(usuario)
                 .addOnSuccessListener {
