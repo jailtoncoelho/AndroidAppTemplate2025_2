@@ -54,13 +54,31 @@
         app:layout_constraintTop_toBottomOf="@id/button_select_image" />
 
     <EditText
+        android:id="@+id/latitudeItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Latitude: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nome_produtoItemEditText" />
+
+    <EditText
+        android:id="@+id/longitudeItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Longitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/latitudeItemEditText" />
+
+    <EditText
         android:id="@+id/descricaoItemEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Descrição"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nome_produtoItemEditText" />
+        app:layout_constraintTop_toBottomOf="@id/longitudeItemEditText" />
 
     <EditText
         android:id="@+id/valorItemEditText"

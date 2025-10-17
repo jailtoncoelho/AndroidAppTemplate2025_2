@@ -3,7 +3,6 @@ package com.ifpr.androidapptemplate.ui.home
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,15 +17,12 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Looper
 import androidx.core.app.ActivityCompat
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -49,7 +45,7 @@ class HomeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
-
+    private var current_location: Location? = null
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
@@ -153,12 +149,14 @@ class HomeFragment : Fragment() {
             locationCallback,
             Looper.getMainLooper()
         )
+
     }
 
     private fun displayAddress(location: Location) {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
+        current_location = location
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val address = addresses?.firstOrNull()?.getAddressLine(0) ?: "Address not found"
@@ -182,6 +180,7 @@ class HomeFragment : Fragment() {
         val databaseRef = FirebaseDatabase.getInstance().getReference("produtos")
 
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 container.removeAllViews()
 
@@ -193,10 +192,33 @@ class HomeFragment : Fragment() {
                             .inflate(R.layout.item_template, container, false)
 
                         val imageView = itemView.findViewById<ImageView>(R.id.item_image)
-                        val nome_produtoView = itemView.findViewById<TextView>(R.id.item_nome_produto)
+                        val nome_produtoView =
+                            itemView.findViewById<TextView>(R.id.item_nome_produto)
+                        val distanciaView = itemView.findViewById<TextView>(R.id.item_distancia)
+                        val valorView = itemView.findViewById<TextView>(R.id.item_valor)
+                        val estoqueView = itemView.findViewById<TextView>(R.id.item_estoque)
+                        val descricaoView = itemView.findViewById<TextView>(R.id.item_descricao)
+                        val proporcaoView = itemView.findViewById<TextView>(R.id.item_proporcao)
 
-                        nome_produtoView.text = "Nome do Produto: ${item.nome_produto ?: "Não informado"}"
+                        nome_produtoView.text =
+                            "Nome do Produto: ${item.nome_produto ?: "Não informado"}"
+                        valorView.text = "Valor: ${item.valor ?: "Não informado"}"
+                        estoqueView.text = "Estoque: ${item.estoque ?: "Não informado"}"
+                        descricaoView.text = "Descrição: ${item.descricao ?: "Não informado"}"
+                        proporcaoView.text = "Proporção: ${item.proporcao ?: "Não informado"}"
 
+                        val targetLocation = Location("").apply {
+                            item.latitude?.let { latitude = it }
+                            item.longitude?.let { longitude = it }
+                        }
+
+                        if (current_location != null) {
+
+                            val distanceInMeters = current_location?.distanceTo(targetLocation)
+                            val distanceInKm = distanceInMeters?.div(1000)
+                            distanciaView.text =
+                                "Distância o vendedor: %.2f km".format(distanceInKm)
+                        }
                         if (!item.imageUrl.isNullOrEmpty()) {
                             Glide.with(container.context).load(item.imageUrl).into(imageView)
                         } else if (!item.base64Image.isNullOrEmpty()) {

@@ -30,6 +30,8 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
 
     private lateinit var nome_produtoEditText: EditText
+    private lateinit var latitudeEditText: EditText
+    private lateinit var longitudeEditText: EditText
     private lateinit var descricaoEditText: EditText
     private lateinit var valorEditText: EditText
     private lateinit var estoqueEditText: EditText
@@ -71,6 +73,8 @@ class DashboardFragment : Fragment() {
         salvarButton = view.findViewById(R.id.salvarItemButton)
         selectImageButton = view.findViewById(R.id.button_select_image)
         nome_produtoEditText = view.findViewById(R.id.nome_produtoItemEditText)
+        latitudeEditText = view.findViewById(R.id.latitudeItemEditText)
+        longitudeEditText = view.findViewById(R.id.longitudeItemEditText)
         descricaoEditText = view.findViewById(R.id.descricaoItemEditText)
         valorEditText = view.findViewById(R.id.valorItemEditText)
         estoqueEditText = view.findViewById(R.id.estoqueItemEditText)
@@ -107,6 +111,8 @@ class DashboardFragment : Fragment() {
     private fun salvarItem() {
         //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
         val nome_produto = nome_produtoEditText.text.toString().trim()
+        val latitude = latitudeEditText.text.toString().trim()
+        val longitude = longitudeEditText.text.toString().trim()
         val descricao = descricaoEditText.text.toString().trim()
         val valor = valorEditText.text.toString().toFloat()
         val estoque = estoqueEditText.text.toString().toInt()
@@ -134,13 +140,15 @@ class DashboardFragment : Fragment() {
             if (bytes != null) {
                 val base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
                 val nome_produto = nome_produtoEditText.text.toString().trim()
+                val latitude = latitudeEditText.text.toString().trim().toDouble()
+                val longitude = longitudeEditText.text.toString().trim().toDouble()
                 val descricao = descricaoEditText.text.toString().trim()
                 val valor = valorEditText.text.toString().toFloat()
                 val estoque = estoqueEditText.text.toString().toInt()
                 val proporcao = proporcaoEditText.text.toString().trim()
                 //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
 
-                val item = Item(nome_produto, descricao, valor, estoque, proporcao, base64Image)
+                val item = Item(nome_produto, latitude, longitude, descricao, valor, estoque, proporcao, base64Image)
 
                 saveItemIntoDatabase(item)
             }

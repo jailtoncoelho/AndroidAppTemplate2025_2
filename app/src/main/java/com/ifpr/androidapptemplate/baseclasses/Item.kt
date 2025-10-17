@@ -2,6 +2,8 @@ package com.ifpr.androidapptemplate.baseclasses
 
 data class Item(
     var nome_produto: String? = null,
+    var latitude: Double? = null,
+    var longitude: Double? = null,
     var descricao: String? = null,
     var valor: Float? = null,
     var estoque: Int? = null,
