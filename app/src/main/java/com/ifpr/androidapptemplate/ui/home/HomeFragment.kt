@@ -1,24 +1,23 @@
 package com.ifpr.androidapptemplate.ui.home
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.Context
+import android.location.Geocoder
+import android.location.Location
+import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import android.util.Base64
-import android.widget.*
-import android.graphics.BitmapFactory
-import android.location.Geocoder
-import android.location.Location
-import android.os.Looper
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -31,20 +30,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ifpr.androidapptemplate.R
+import com.ifpr.androidapptemplate.baseclasses.Item
+import com.ifpr.androidapptemplate.databinding.FragmentHomeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Base64
 import java.util.Locale
-import com.ifpr.androidapptemplate.R
-import com.ifpr.androidapptemplate.baseclasses.Item
-import com.ifpr.androidapptemplate.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var currentAddressTextView: TextView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
@@ -53,42 +53,45 @@ class HomeFragment : Fragment() {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root = binding.root
 
-        inicializaGerenciamentoLocalizacao(view)
+        // Botão "Abrir no Maps"
+        binding.btnOpenMaps.setOnClickListener { openInGoogleMaps() }
 
-        val container = view.findViewById<LinearLayout>(R.id.itemContainer)
-        carregarItensMarketplace(container)
+        // Localização em tempo real (mostra no currentAddressTextView)
+        inicializaGerenciamentoLocalizacao()
 
-        return view
+        // Marketplace (usa um LinearLayout com id itemContainer no layout)
+        carregarItensMarketplace(binding.itemContainer)
+
+        return root
     }
 
-    private fun inicializaGerenciamentoLocalizacao(view: View) {
-        currentAddressTextView = view.findViewById(R.id.currentAddressTextView)
+    // ===== Localização =====
+    private fun inicializaGerenciamentoLocalizacao() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (!temPermissaoLocalizacao()) {
             requestLocationPermission()
         } else {
             getCurrentLocation()
         }
+    }
+
+    private fun temPermissaoLocalizacao(): Boolean {
+        val fine = ContextCompat.checkSelfPermission(
+            requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        val coarse = ContextCompat.checkSelfPermission(
+            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        return fine || coarse
     }
 
     private fun requestLocationPermission() {
@@ -113,7 +116,7 @@ class HomeFragment : Fragment() {
             } else {
                 Snackbar.make(
                     requireView(),
-                    "Permission denied. Cannot access location.",
+                    "Permissão negada. Não é possível acessar a localização.",
                     Snackbar.LENGTH_LONG
                 ).show()
             }
@@ -121,30 +124,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
+        if (!temPermissaoLocalizacao()) return
+
+        // API nova (evita deprecated)
+        locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 30_000L)
+            .setMinUpdateDistanceMeters(0f)
+            .build()
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.lastLocation?.let { location ->
-                    displayAddress(location)
-                }
+                val location = locationResult.lastLocation ?: return
+                displayAddress(location)
             }
-        }
-
-        locationRequest = LocationRequest.create().apply {
-            interval = 30000 // Intervalo em milissegundos para atualizacoes de localizacao
-            fastestInterval =
-                30000 // O menor intervalo de tempo para receber atualizacoes de localizacao
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
         fusedLocationClient.requestLocationUpdates(
@@ -156,28 +147,55 @@ class HomeFragment : Fragment() {
 
     private fun displayAddress(location: Location) {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val address = addresses?.firstOrNull()?.getAddressLine(0) ?: "Address not found"
+                // getFromLocation síncrono (ok p/ atividade); se quiser, dá pra adaptar para callback em API 33+
+                val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                val address = addresses?.firstOrNull()?.getAddressLine(0)
+                    ?: "Endereço não encontrado"
+
                 withContext(Dispatchers.Main) {
-                    currentAddressTextView.text = address
+                    binding.currentAddressTextView.text = address
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    currentAddressTextView.text = "Error: ${e.message}"
+                    binding.currentAddressTextView.text = "Erro: ${e.message}"
                 }
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    // ===== Abrir no Google Maps =====
+    private fun openInGoogleMaps() {
+        if (!temPermissaoLocalizacao()) {
+            Toast.makeText(requireContext(), "Sem permissão de localização", Toast.LENGTH_SHORT).show()
+            requestLocationPermission()
+            return
+        }
+
+        val fused = LocationServices.getFusedLocationProviderClient(requireContext())
+        fused.lastLocation.addOnSuccessListener { loc ->
+            if (loc == null) {
+                Toast.makeText(requireContext(), "Sem localização ainda", Toast.LENGTH_SHORT).show()
+                return@addOnSuccessListener
+            }
+            val uri = "geo:${loc.latitude},${loc.longitude}?q=${loc.latitude},${loc.longitude}(Minha+Localização)"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri)).apply {
+                setPackage("com.google.android.apps.maps")
+            }
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "Google Maps não está instalado", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(requireContext(), "Não foi possível obter a localização", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    fun carregarItensMarketplace(container: LinearLayout) {
+    // ===== Marketplace =====
+    private fun carregarItensMarketplace(container: LinearLayout) {
         val databaseRef = FirebaseDatabase.getInstance().getReference("itens")
 
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -196,14 +214,17 @@ class HomeFragment : Fragment() {
 
                         enderecoView.text = "Endereço: ${item.endereco ?: "Não informado"}"
 
-                        if (!item.imageUrl.isNullOrEmpty()) {
-                            Glide.with(container.context).load(item.imageUrl).into(imageView)
-                        } else if (!item.base64Image.isNullOrEmpty()) {
-                            try {
-                                val bytes = Base64.decode(item.base64Image, Base64.DEFAULT)
-                                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                imageView.setImageBitmap(bitmap)
-                            } catch (_: Exception) {}
+                        when {
+                            !item.imageUrl.isNullOrEmpty() ->
+                                Glide.with(container.context).load(item.imageUrl).into(imageView)
+
+                            !item.base64Image.isNullOrEmpty() -> {
+                                try {
+                                    val bytes = Base64.getDecoder().decode(item.base64Image)
+                                    val bitmap = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                    imageView.setImageBitmap(bitmap)
+                                } catch (_: Exception) { /* ignora erro de base64 */ }
+                            }
                         }
 
                         container.addView(itemView)
@@ -215,5 +236,14 @@ class HomeFragment : Fragment() {
                 Toast.makeText(container.context, "Erro ao carregar dados", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // parar updates de localização para evitar vazamento
+        if (this::fusedLocationClient.isInitialized && this::locationCallback.isInitialized) {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+        }
+        _binding = null
     }
 }
