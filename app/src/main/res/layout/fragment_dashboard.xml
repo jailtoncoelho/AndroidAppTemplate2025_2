@@ -45,13 +45,69 @@
 
 
     <EditText
-        android:id="@+id/enderecoItemEditText"
+        android:id="@+id/nome_produtoItemEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Endereço"
+        android:hint="Nome do Produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_select_image" />
+
+    <EditText
+        android:id="@+id/latitudeItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Latitude: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nome_produtoItemEditText" />
+
+    <EditText
+        android:id="@+id/longitudeItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Longitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/latitudeItemEditText" />
+
+    <EditText
+        android:id="@+id/descricaoItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/longitudeItemEditText" />
+
+    <EditText
+        android:id="@+id/valorItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Valor"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descricaoItemEditText" />
+
+    <EditText
+        android:id="@+id/estoqueItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Estoque"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/valorItemEditText" />
+
+    <EditText
+        android:id="@+id/proporcaoItemEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Proporção"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/estoqueItemEditText" />
 
 
     <Button
@@ -59,7 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Salvar"
-        app:layout_constraintTop_toBottomOf="@id/enderecoItemEditText"
+        app:layout_constraintTop_toBottomOf="@id/proporcaoItemEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
