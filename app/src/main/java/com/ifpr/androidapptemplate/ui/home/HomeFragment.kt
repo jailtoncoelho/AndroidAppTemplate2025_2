@@ -23,6 +23,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -137,12 +138,10 @@ class HomeFragment : Fragment() {
             }
         }
 
-        locationRequest = LocationRequest.create().apply {
-            interval = 30000 // Intervalo em milissegundos para atualizacoes de localizacao
-            fastestInterval =
-                30000 // O menor intervalo de tempo para receber atualizacoes de localizacao
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
+        locationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY, 30000L
+        ).setMinUpdateIntervalMillis(30000L)
+            .build()
 
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
