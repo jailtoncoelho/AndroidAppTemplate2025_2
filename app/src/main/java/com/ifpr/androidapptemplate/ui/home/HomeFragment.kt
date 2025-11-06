@@ -3,6 +3,8 @@ package com.ifpr.androidapptemplate.ui.home
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,11 +26,13 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ifpr.androidapptemplate.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,6 +41,7 @@ import java.util.Locale
 import com.ifpr.androidapptemplate.R
 import com.ifpr.androidapptemplate.baseclasses.Item
 import com.ifpr.androidapptemplate.databinding.FragmentHomeBinding
+import com.ifpr.androidapptemplate.ui.ai.AiLogicActivity
 
 class HomeFragment : Fragment() {
 
@@ -66,6 +71,14 @@ class HomeFragment : Fragment() {
 
         val container = view.findViewById<LinearLayout>(R.id.itemContainer)
         carregarItensMarketplace(container)
+
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab_ai)
+
+        fab.setOnClickListener {
+            val context = view.context
+            val intent = Intent(context, AiLogicActivity::class.java)
+            context.startActivity(intent)
+        }
 
         return view
     }
