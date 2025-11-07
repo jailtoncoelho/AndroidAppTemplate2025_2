@@ -25,10 +25,50 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/item_endereco"
+                android:id="@+id/item_nome_produto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Endereço:"
+                android:text="Nome do Produto:"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_valor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_estoque"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estoque: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_distancia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distância: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_proporcao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proporção: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição: "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

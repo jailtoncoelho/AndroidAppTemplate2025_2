@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
         registerLink = findViewById(R.id.registerLink)
         btnGoogleSignIn = findViewById<SignInButton>(R.id.btnGoogleSignIn)
 
-        val registerLink: TextView = findViewById(R.id.registerLink)
         registerLink.setOnClickListener {
             val intent: Intent = Intent(
                 applicationContext,

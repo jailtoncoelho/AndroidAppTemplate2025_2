@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_bj"
     android:padding="10dp"
     tools:context=".ui.usuario.PerfilUsuarioFragment">
 
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Perfil de Usuário"
+        android:textColor="@color/black_bj"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,8 +35,11 @@
 
     <EditText
         android:id="@+id/registerNameEditText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
         android:hint="Nome"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +48,11 @@
 
     <EditText
         android:id="@+id/registerEmailEditText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/registerNameEditText"
@@ -53,27 +61,48 @@
 
     <EditText
         android:id="@+id/registerEnderecoEditText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
         android:hint="Endereço"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerEmailEditText" />
 
     <EditText
-        android:id="@+id/registerPasswordEditText"
-        android:layout_width="0dp"
+        android:id="@+id/registerGeneroEditText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
+        android:hint="Genero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registerEnderecoEditText" />
+
+    <EditText
+        android:id="@+id/registerPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
         android:hint="Senha"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/registerEnderecoEditText"
+        app:layout_constraintTop_toBottomOf="@id/registerGeneroEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/registerConfirmPasswordEditText"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_bj"
+        android:textColorHint="@color/blue_bj"
+        android:backgroundTint="@color/blue_bj"
         android:hint="Confirmar Senha"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/registerPasswordEditText"
@@ -82,7 +111,7 @@
 
     <Button
         android:id="@+id/salvarButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Atualizar"
         app:layout_constraintTop_toBottomOf="@id/registerConfirmPasswordEditText"
@@ -91,7 +120,7 @@
 
     <Button
         android:id="@+id/sairButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sair"
         app:layout_constraintTop_toBottomOf="@id/salvarButton"

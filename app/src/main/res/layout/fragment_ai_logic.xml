@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white_bj"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -12,6 +13,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/bitmapImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/gallery_thumb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Selecionar iMagem"/>
+
+        <Button
+            android:id="@+id/btn_select_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecionar Imagem"
+            android:layout_marginTop="8dp" />
 
         <EditText
             android:id="@+id/prompt_input"
