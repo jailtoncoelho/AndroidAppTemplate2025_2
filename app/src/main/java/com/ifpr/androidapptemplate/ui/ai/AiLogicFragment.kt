@@ -103,20 +103,4 @@ class AiLogicFragment : Fragment() {
             }
         }
     }
-
-    private fun generateFromPrompt(prompt: String, bitmap: Bitmap) {
-        lifecycleScope.launch {
-            try {
-                // Provide a prompt that includes the image specified above and text
-                val promptImage = content {
-                    image(bitmap)
-                    text(prompt)
-                }
-                val response = model.generateContent(promptImage)
-                resultText.text = response.text ?: "Nenhuma resposta recebida."
-            } catch (e: Exception) {
-                resultText.text = "Erro ao gerar resposta: ${e.message}"
-            }
-        }
-    }
 }
