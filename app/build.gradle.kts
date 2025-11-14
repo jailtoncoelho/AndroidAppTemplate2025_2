@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.firebase.ai)
+    implementation(libs.firebase.messaging.ktx)
     implementation(libs.google.firebase.ai)
 
     implementation(libs.glide)
