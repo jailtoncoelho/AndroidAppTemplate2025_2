@@ -3,14 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_mapa"> <!-- ✅ MUDANÇA 1: O mapa é a tela inicial -->
 
+    <!-- ✅ MUDANÇA 2: Adicionamos o novo MapaFragment como destino principal -->
+    <fragment
+        android:id="@+id/navigation_mapa"
+        android:name="com.ifpr.androidapptemplate.ui.mapa.MapaFragment"
+        android:label="@string/title_mapa"
+        tools:layout="@layout/fragment_mapa" />
+
+    <!-- O HomeFragment agora é o destino para "Adicionar Tesouro" -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.ifpr.androidapptemplate.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+    <!-- Mantemos o Perfil e podemos remover os outros por enquanto para simplificar -->
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.ifpr.androidapptemplate.ui.usuario.PerfilUsuarioFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_perfil_usuario" />
+
+    <!-- As telas Dashboard e Notifications podem ser removidas ou mantidas se você for usá-las -->
+    <!-- Por enquanto, vamos mantê-las comentadas para limpar a interface -->
+    <!--
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.ifpr.androidapptemplate.ui.dashboard.DashboardFragment"
@@ -22,4 +40,6 @@
         android:name="com.ifpr.androidapptemplate.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    -->
+
 </navigation>
