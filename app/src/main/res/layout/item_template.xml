@@ -1,85 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="8dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="409dp"
+        android:background="#FFFFFF">
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="214dp"
+            android:layout_height="182dp"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_nome_produto" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/item_nome_produto"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/item_nome_produto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nome do Produto:"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/item_valor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="R$: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_image" />
 
-            <TextView
-                android:id="@+id/item_valor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="R$: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/item_estoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Estoque: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_valor" />
 
-            <TextView
-                android:id="@+id/item_estoque"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Estoque: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/item_distancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Distância: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_estoque" />
 
-            <TextView
-                android:id="@+id/item_distancia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distância: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/item_proporcao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Proporção: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_distancia" />
 
-            <TextView
-                android:id="@+id/item_proporcao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Proporção: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/item_descricao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descrição: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <!-- Campos futuros aqui -->
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        <TextView
+            android:id="@+id/item_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Descrição: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_proporcao" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
