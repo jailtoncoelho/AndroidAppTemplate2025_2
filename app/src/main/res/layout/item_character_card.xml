@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#F7F7D8"> <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/tvCharacterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3E2723"
+        tools:text="Drakon, o Bárbaro Solitário" />
+
+    <TextView
+        android:id="@+id/tvCharacterClassRace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="14sp"
+        android:textColor="#6D4C41"
+        tools:text="Raça: Anão das Montanhas | Classe: Bárbaro" />
+
+    <TextView
+        android:id="@+id/tvCharacterConcept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        android:textColor="#5D4037"
+        android:maxLines="2"
+        android:ellipsize="end"
+        tools:text="Atributos: C: 10 | H: 12 | N: 8 | V: 15" />
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>

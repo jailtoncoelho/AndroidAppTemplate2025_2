@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.creation.CreationFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criação de Goblin"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btn_criar_ficha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ROLAR NOVO GOBLIN MALDITO"
+            android:layout_marginBottom="32dp"/>
+
+        <LinearLayout style="@style/AttributeRowStyle">
+            <TextView style="@style/AttributeLabelStyle" android:text="NÍVEL:" />
+            <TextView
+                android:id="@+id/tv_nivel_valor"
+                style="@style/AttributeValueStyle"
+                android:text="1"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome e Descritor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_nome_goblin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textStyle="italic"
+            tools:text="Plaft"/>
+
+        <TextView
+            android:id="@+id/tv_descritor_goblin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp"
+            tools:text="(Supimpa (+1 em COMBATE))"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ocupação"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_ocupacao_goblin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            tools:text="Mercenário"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Característica"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_caracteristica_goblin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            tools:text="Bomba-relógio"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atributos Base"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F0F0F0"
+            android:padding="10dp">
+
+            <LinearLayout style="@style/AttributeRowStyle">
+                <TextView style="@style/AttributeLabelStyle" android:text="COMBATE:" />
+                <TextView android:id="@+id/tv_combate_valor" style="@style/AttributeValueStyle" tools:text="3"/>
+            </LinearLayout>
+            <LinearLayout style="@style/AttributeRowStyle">
+                <TextView style="@style/AttributeLabelStyle" android:text="HABILIDADE:" />
+                <TextView android:id="@+id/tv_habilidade_valor" style="@style/AttributeValueStyle" tools:text="2"/>
+            </LinearLayout>
+            <LinearLayout style="@style/AttributeRowStyle">
+                <TextView style="@style/AttributeLabelStyle" android:text="NOÇÃO:" />
+                <TextView android:id="@+id/tv_nocao_valor" style="@style/AttributeValueStyle" tools:text="1"/>
+            </LinearLayout>
+            <LinearLayout style="@style/AttributeRowStyle">
+                <TextView style="@style/AttributeLabelStyle" android:text="VITALIDADE:" />
+                <TextView android:id="@+id/tv_vitalidade_valor" style="@style/AttributeValueStyle" tools:text="3"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/AttributeRowStyle" android:layout_marginTop="8dp">
+                <TextView style="@style/AttributeLabelStyle" android:text="FERIMENTOS:" />
+                <TextView
+                    android:id="@+id/tv_ferimentos_valor"
+                    style="@style/AttributeValueStyle"
+                    android:text="0"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipamento Inicial"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"/>
+        <TextView
+            android:id="@+id/tv_equipamento_goblin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            tools:text="Adagas de arremesso, Corda"/>
+
+        <Button
+            android:id="@+id/btn_salvar_ficha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SALVAR GOBLIN NO FIREBASE"
+            android:enabled="false"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
